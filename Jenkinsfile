@@ -23,12 +23,12 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                docker build -t  kapilgahlot98/micro_service:Product
+                bat "docker build -t  kapilgahlot98/micro_service:Product"
             }
         }
         stage('Docker Deploy') {
             steps {
-                docker push kapilgahlot98/micro_service:Product
+                bat "docker push kapilgahlot98/micro_service:Product"
             }
         }
     }

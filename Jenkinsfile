@@ -7,7 +7,7 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Compile') {
             steps {
                 // Get some code from a GitHub repository
                 git 'https://github.com/kapilgahlot1998/Product.git'
@@ -19,6 +19,16 @@ pipeline {
                     junit '**/target/surefire-reports/TEST-*.xml'
                     archiveArtifacts 'target/*.jar'
                 }
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                docker build -t  kapilgahlot98/micro_service:Product
+            }
+        }
+        stage('Docker Deploy') {
+            steps {
+                docker push kapilgahlot98/micro_service:Product
             }
         }
     }
